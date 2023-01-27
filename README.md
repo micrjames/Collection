@@ -62,4 +62,4 @@ As this code is intended to be a part of a project in itself, this project is st
 The areas where there may be some room for improvement are those where some properties may be better suited to be public and thereby a couple functions should be removed.
 
 ## Contact
-Feel free to contact me @michaelrjamesjr on twitter or on github @micrjames or check out my blog at michaelrjames.hashnode.dev
+Feel free to contact me @micrjamesjr on twitter or on github @micrjames
