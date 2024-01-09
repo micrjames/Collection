@@ -12,10 +12,10 @@ An array-like object which also implements an iterator.
 * [Contact](#contact)
 
 ## General Info
-I wrote this as part of working through implementing data structures. Starting with implementing a Set, I decided not to use an array as the basic container for the data to be held in the Set. As JavaScript is so object-centric these days, especially since es6, I decided to create an array-like object with an iterator and implement a Set using that as the data container.
+I wrote this as part of working through implementing data structures. Starting with implementing a Set, I decided not to use an array as the basic container for the data to be held in the Set. As JavaScript/Typescript is so object-centric these days, especially since es6, I decided to create an array-like object with an iterator and implement a Set using that as the data container.
 
 ## Technologies Used
-I'm only using plain, vanilla JavaScript with no libraries or other packages.
+I'm only using plain, vanilla Typescript with no libraries or other packages.
 
 ## Features
 * An object with an iterator that functions as the container to hold data.
@@ -51,9 +51,9 @@ Or, we can get a particular element from the Collection. For instance, 3:
 ```
 coll.getElement(2);
 ```
-And we can also get the length of the Collection.
+And we can also get the size of the Collection.
 ```
-coll.length();
+coll.size;
 ```
 ## Project Status
 As this code is intended to be a part of a project in itself, this project is still in progress and will be until that project is completed. 
@@ -62,4 +62,4 @@ As this code is intended to be a part of a project in itself, this project is st
 The areas where there may be some room for improvement are those where some properties may be better suited to be public and thereby a couple functions should be removed.
 
 ## Contact
-Feel free to contact me @micrjamesjr on twitter or on github @micrjames
+Feel free to contact me @michaelrjamesjr on twitter.
