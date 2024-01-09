@@ -2,67 +2,49 @@ interface dataObj {
     [index: number]: any;
 }
 
-class Collection {
+class Collection implements Iterable<any>{
 	private data: typeof dataObj;
-	private length: number;
+	private _size: number;
 
 	constructor() {
 	   this.data = {};
-	   this.length = 0;
+	   this._size = 0;
 	}
    	push(element: any) {
-	   this.data[this.length] = element;
-	   this.length++;
+	   this.data[this._size] = element;
+	   this._size++;
 	   return this.data;
+	};
+	pop(): typeof dataObj {
+	    delete this.data[this._size-1];
+	    this._size--;
+	    return this.data;
+	};
+    getElement(index: number) {
+	   return this.data[index];
 	};
     get(): typeof dataObj {
 	   return this.data;
 	} 
-}
-
-/*
-implements Iterable<type>
-
-:IterableIterator<number>
-
- this.pop = function() {
-	    delete data[length-1];
-	    length--;
-	    return data;
+    get size(): number {
+	   return this._size;
 	};
-    this.getElement = function(index) {
-	   return data[index];
-	};
-    this.length = function() {
-	   return length;
-	};
-    // for .. of calls this function
-    data[Symbol.iterator] = function() {
+    *[Symbol.iterator](): IterableIterator<any> {
 	   let index = 0;
-	   let returnVal;
-	   return {
-		  index,
-		  next() {
-			 if(this.index <= length) {
-				let currentVal = this.index++;
-				// {
-				// 		done: Boolean,
-				// 		value: any
-				// }
-				returnVal = {
-				   done: false,
-				   value: data[currentVal]
-				};
-			 } else {
-				returnVal = {
-				   done: true
-				};
-			 }
-			 // return an iterator
-			 return returnVal;
-		  }
+	   while(index < this._size) {
+	      yield this.data[index++];
 	   }
-	};
- */
+	}
+	toString(): string {
+	   let string = '[';
+       for(let index = 0; index < this._size; index++) {
+		  string += this.data[index];
+		  if(index < this._size-1) string += ',';
+	   }		  
+	   string += ']';
+
+	   return string;
+	}
+}
 
 exports.Collection = Collection;
