@@ -1,18 +1,34 @@
-function Collection() {
-	let data = {};
-	let length = 0;
-   	this.push = function(element) {
-	   data[length] = element;
-	   length++;
-	   return data;
+interface dataObj {
+    [index: number]: any;
+}
+
+class Collection {
+	private data: typeof dataObj;
+	private length: number;
+
+	constructor() {
+	   this.data = {};
+	   this.length = 0;
+	}
+   	push(element: any) {
+	   this.data[this.length] = element;
+	   this.length++;
+	   return this.data;
 	};
-    this.pop = function() {
+    get(): typeof dataObj {
+	   return this.data;
+	} 
+}
+
+/*
+implements Iterable<type>
+
+:IterableIterator<number>
+
+ this.pop = function() {
 	    delete data[length-1];
 	    length--;
 	    return data;
-	};
-    this.get = function() {
-	   return data;
 	};
     this.getElement = function(index) {
 	   return data[index];
@@ -47,4 +63,6 @@ function Collection() {
 		  }
 	   }
 	};
-}
+ */
+
+exports.Collection = Collection;
