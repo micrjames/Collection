@@ -1,16 +1,14 @@
-interface dataObj {
-    [index: number]: any;
-}
+import { dataObj } from "./utils/utils";
 
 class Collection implements Iterable<any>{
-	private data: typeof dataObj;
-	private _size: number;
+	protected data: typeof dataObj;
+	protected _size: number;
 
 	constructor() {
 	   this.data = {};
 	   this._size = 0;
 	}
-   	push(element: any) {
+  	push(element: any) {
 	   this.data[this._size] = element;
 	   this._size++;
 	   return this.data;
@@ -38,8 +36,10 @@ class Collection implements Iterable<any>{
 	toString(): string {
 	   let string = '[';
        for(let index = 0; index < this._size; index++) {
-		  string += this.data[index];
-		  if(index < this._size-1) string += ',';
+		  if(this.data[index]) {
+			 string += this.data[index];
+			 if(index < this._size-1) string += ',';
+		  }
 	   }		  
 	   string += ']';
 
