@@ -10,12 +10,12 @@ class Collection implements Iterable<any>{
 	}
   	push(element: any) {
 	   this.data[this._size] = element;
-	   this._size++;
+	   this._size = this.size;
 	   return this.data;
 	};
 	pop(): typeof dataObj {
 	    delete this.data[this._size-1];
-	    this._size--;
+		this._size = this.size;
 	    return this.data;
 	};
     getElement(index: number) {
@@ -25,8 +25,8 @@ class Collection implements Iterable<any>{
 	   return this.data;
 	} 
     get size(): number {
-	   return this._size;
-	};
+	   return Object.keys(this.data).length;
+	}
     *[Symbol.iterator](): IterableIterator<any> {
 	   let index = 0;
 	   while(index < this._size) {

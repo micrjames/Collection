@@ -33,6 +33,7 @@ describe("An array-like collection of data.", () => {
 	   collection.push(5);
 	   const collectionArr = [...collection];
 	   test("Should be a collection of 5 items.", () => {
+		   console.log(collection.size);
 		   expect(collectionArr).toHaveLength(collection.size);
 	   });
 	   test("Should output a collection of the 5 items contained.", () => {
