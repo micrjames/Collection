@@ -36,7 +36,7 @@ class Collection implements Iterable<any>{
 	toString(): string {
 	   let string = '[';
        for(let index = 0; index < this._size; index++) {
-		  if(this.data[index]) {
+		  if(this.data[index] !== undefined) {
 			 string += this.data[index];
 			 if(index < this._size-1) string += ',';
 		  }
