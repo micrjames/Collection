@@ -1,8 +1,9 @@
 import { dataObj } from "./utils/utils";
 
-class Collection implements Iterable<any>{
+class Collection implements IterableIterator<dataObj>{
 	protected data: typeof dataObj;
 	protected _size: number;
+	private idx = 0;
 
 	constructor() {
 	   this.data = {};
@@ -27,11 +28,21 @@ class Collection implements Iterable<any>{
     get size(): number {
 	   return Object.keys(this.data).length;
 	}
-    *[Symbol.iterator](): IterableIterator<any> {
-	   let index = 0;
-	   while(index < this._size) {
-	      yield this.data[index++];
+	next(): IteratorResult<dataObj> {
+	   if(this.idx < this.size) {
+		  return {
+			 done: false,
+			 value: this.data[this.idx++]
+		  }
+	   } else {
+		  return {
+			 done: true,
+			 value: null
+		  }
 	   }
+	}
+    [Symbol.iterator](): IterableIterator<dataObj> {
+	   return this;
 	}
 	toString(): string {
 	   let string = '[';
