@@ -1,4 +1,4 @@
-const { Collection } = require("../Collection");
+import { Collection } from "../Collection";
 import { dataObj } from "../utils/utils";
 
 describe("An array-like collection of data.", () => {

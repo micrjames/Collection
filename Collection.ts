@@ -1,6 +1,6 @@
 import { dataObj } from "./utils/utils";
 
-class Collection implements IterableIterator<dataObj>{
+export class Collection implements IterableIterator<dataObj>{
 	protected data: typeof dataObj;
 	protected _size: number;
 	private idx = 0;
@@ -57,5 +57,3 @@ class Collection implements IterableIterator<dataObj>{
 	   return string;
 	}
 }
-
-exports.Collection = Collection;
