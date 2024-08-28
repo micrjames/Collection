@@ -3,10 +3,10 @@ import { dataObj } from "../utils/utils";
 
 describe("An array-like collection of data.", () => {
 	describe("Basic operations.", () => {
-	   let collection: typeof Collection;
+	   let collection: Collection;
 	   let value: number;
 	   let data: dataObj;
-	   let element; 
+	   let element: dataObj; 
 	   let size: number;
 	   beforeAll(() => {
 		  collection = new Collection();
@@ -34,7 +34,7 @@ describe("An array-like collection of data.", () => {
 	});
 	describe("That is iterable.", () => {
 	   describe("Gives each value of the Collection.", () => {
-		  let collection: typeof Collection;
+		  let collection: Collection;
 		  beforeAll(() => {
 			 collection = new Collection();
 			 collection.push(1);
@@ -75,8 +75,8 @@ describe("An array-like collection of data.", () => {
 		  });
 	   });
 	   describe("Gives the values as an array.", () => {
-		  let collection: typeof Collection;
-		  let collectionArr: number[];
+		  let collection: Collection;
+		  let collectionArr: dataObj[];
 		  beforeAll(() => {
 			 collection = new Collection();
 			 collection.push(1);

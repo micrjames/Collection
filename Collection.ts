@@ -1,7 +1,7 @@
 import { dataObj } from "./utils/utils";
 
 export class Collection implements IterableIterator<dataObj>{
-	protected data: typeof dataObj;
+	protected data: dataObj;
 	protected _size: number;
 	private idx = 0;
 
@@ -14,15 +14,15 @@ export class Collection implements IterableIterator<dataObj>{
 	   this._size = this.size;
 	   return this.data;
 	};
-	pop(): typeof dataObj {
+	pop(): dataObj {
 	    delete this.data[this._size-1];
 		this._size = this.size;
 	    return this.data;
 	};
-    getElement(index: number) {
+    getElement(index: number): dataObj {
 	   return this.data[index];
 	};
-    get(): typeof dataObj {
+    get(): dataObj {
 	   return this.data;
 	} 
     get size(): number {
