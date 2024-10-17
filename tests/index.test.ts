@@ -4,10 +4,6 @@ import { dataObj } from "../utils/utils";
 describe("An array-like collection of data", () => {
 	describe("When Created", () => {
 	   let collection: Collection<number>;
-	   let value: number;
-	   let data: dataObj<number>;
-	   let element: dataObj<number>; 
-	   let size: number;
 	   beforeAll(() => {
 		  collection = new Collection<number>();
 	   });
@@ -23,38 +19,70 @@ describe("An array-like collection of data", () => {
 	   let collection: Collection<number>;
 	   beforeAll(() => {
 		  collection = new Collection<number>();
-		  collection.push(1);
-		  console.log(collection.toString());
 	   });
-	   test("Should not be empty.", () => {
-		   expect(collection.is_empty).toBeFalsy();
+	   describe("push", () => {
+		  beforeAll(() => {
+			 collection.push(1);
+		  });
+		  test("Should not be empty.", () => {
+			  expect(collection.is_empty).toBeFalsy();
+		  });
+		  test("Should retrieve the item that was 'push'ed.", () => {
+			  const data = collection.at(0);
+			  expect(data).toBe(1);
+		  });
+		  test("Should be of a size of one element.", () => {
+			  const size = collection.size;
+			  expect(size).toBe(1);
+		  });
 	   });
-	   test("Should retrieve the item.", () => {
-		   const data = collection.at(0);
-		   expect(data).toBe(1);
+	   describe("prepend", () => {
+		  test.todo("Should prepend the given item to the Collection.");
+		  test.todo("Should be of a size of one element.");
+		  // prepend(item)
 	   });
-	   test("Should be of given length.", () => {
-		   const size = collection.size;
-		   expect(size).toBe(1);
+	   describe("insert", () => {
+		  test.todo("Should insert the given item at the specified index.")
+		  test.todo("Should be of a size of two elements.");
+		  // insert(index, item)
 	   });
-	   test.todo("Should prepend the given item to the Collection.");
-	   // prepend(item)
-	   test.todo("Should insert the given item at the specified index.")
-	   // insert(index, item)
-	   test.todo("Should find the specified item and return the first index.");
-	   // find(item) {
+	   describe("find", () => {
+		  test.todo("Should find the specified item and return the first index of that item.");
+		  test.todo("Should 'find' an item that is of type 'number'.");
+		  test.todo("Should be of a size of two elements.");
+		  // find(item) {
+	   });
 	});
 	describe("Removal operations", () => {
-	   test.todo("Remove the item from the end of the collection and return the value.");
-	   /*
-	   data = collection.pop();
-	   expect(data).toEqual({});
-	   */
-	   // pop()
-	   test.todo("Delete the item at the given index while shifting all trailing elements left.");
-	   // delete(index)
-	   test.todo("Looks for the given value and removes the index holding it."); 
-	   // remove(item)
+	   let collection: Collection<number>;
+	   let size: number;
+	   beforeAll(() => {
+		  collection = new Collection<number>();
+		  collection.push(1);
+		  collection.push(2);
+		  collection.push(3);
+		  size = collection.size;
+	   });
+	   describe("pop", () => {
+		  test("Remove the item from the end of the collection and return the value.", () => {
+			 const data = collection.pop();
+			 expect(data).toBe(3);
+		  });
+		  test("Should give a size that is one less than the size of the collection before the operation.", () => {
+			 const newSize = collection.size;
+			 expect(newSize).toBe(size-1);
+		  });
+	   });
+	   describe("delete", () => {
+		  test.todo("Delete the item at the given index while shifting all trailing elements left.");
+		  test.todo("Should give a size that is two less than the size of the collection before the operation.");
+		  // delete(index)
+	   });
+	   describe("remove", () => {
+		  test.todo("Looks for the given value and removes the index holding it."); 
+		  test.todo("Should give a size that is three less than the size of the collection before the operation.");
+		  // remove(item)
+	   });
 	});
 	describe("That is iterable", () => {
 	   describe("Gives each value of the Collection.", () => {

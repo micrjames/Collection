@@ -37,22 +37,26 @@ export class Collection<T> implements IterableIterator<dataObj<T>>{
 	   return this.data[index];
 	};
 	// inserts item at index, shifts that index’s value and trailing elements to the right.
-	insert(index, item) {
+	insert(index: number, item: T) {
 	}
 	// can use insert above at index 0
-	prepend(item) {
+	prepend(item: T) {
 	}
 	// remove from end, return value
-	pop() {
-	} 
+	pop(): T {
+	    const data = this.data[this._size-1];
+	    delete this.data[this._size-1];
+		this._size--;
+	    return data;
+	}
 	// delete item at index, shifting all trailing elements left
-	delete(index) {
+	delete(index: number) {
 	} 
 	// looks for value and removes index holding it (even if in multiple places)
-	remove(item) {
+	remove(item: T) {
 	} 
 	// looks for value and returns first index with that value, -1 if not found
-	find(item) {
+	find(item: T) {
 	} 
 	/*
 	O(1) to add / remove at end, index, or update
@@ -90,9 +94,4 @@ export class Collection<T> implements IterableIterator<dataObj<T>>{
 }
 
 /*
-	pop(): dataObj {
-	    delete this.data[this._size-1];
-		this._size = this.size;
-	    return this.data;
-	};
  */
