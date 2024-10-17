@@ -37,19 +37,28 @@ describe("An array-like collection of data", () => {
 		  });
 	   });
 	   describe("prepend", () => {
-		  test.todo("Should prepend the given item to the Collection.");
-		  test.todo("Should be of a size of one element.");
-		  // prepend(item)
+		  beforeAll(() => {
+			 collection.prepend(2);
+		  });
+		  test("Should prepend the given item to the Collection.", () => {
+			  const data = collection.at(0);
+			  console.log(collection.toString());
+			  expect(data).toBe(2);
+		  });
+		  test("Should be of a size of two elements.", () => {
+			  const size = collection.size;
+			  expect(size).toBe(2);
+		  });
 	   });
 	   describe("insert", () => {
 		  test.todo("Should insert the given item at the specified index.")
-		  test.todo("Should be of a size of two elements.");
+		  test.todo("Should be of a size of three elements.");
 		  // insert(index, item)
 	   });
 	   describe("find", () => {
 		  test.todo("Should find the specified item and return the first index of that item.");
 		  test.todo("Should 'find' an item that is of type 'number'.");
-		  test.todo("Should be of a size of two elements.");
+		  test.todo("Should be of a size of three elements.");
 		  // find(item) {
 	   });
 	});

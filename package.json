@@ -8,7 +8,7 @@
   },
   "scripts": {
     "test": "jest",
-    "postinstall": "git clone git@github.com:micrjames/StringBuilder"
+    "postinstall": "git clone git@github.com:micrjames/StringBuilder && git clone git@github.com:micrjames/Range"
   },
   "keywords": [],
   "author": "",

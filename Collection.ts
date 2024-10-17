@@ -1,5 +1,6 @@
 import { dataObj } from "./utils/utils";
 import { StringBuilder } from "./StringBuilder/StringBuilder";
+import { Range } from "./Range/range";
 
 export class Collection<T> implements IterableIterator<dataObj<T>>{
 	protected data: dataObj<T>;
@@ -30,7 +31,6 @@ export class Collection<T> implements IterableIterator<dataObj<T>>{
   	push(item: T) {
 	   this.data[this._size] = item;
 	   this._size++;
-	   return this.data;
 	};
 	// returns the item at a given index, blows up if index out of bounds
     at(index: number): T {
@@ -41,6 +41,14 @@ export class Collection<T> implements IterableIterator<dataObj<T>>{
 	}
 	// can use insert above at index 0
 	prepend(item: T) {
+	   const idxs = [...new Range(this._size+1)];
+	   const revIdxs = idxs.reverse();
+	   let value: T; 
+	   revIdxs.forEach(idx => {
+		  idx > 0 ? value = this.data[idx-1] : value = item;
+		  this.data[idx] = value;
+	   });
+	   this._size++;
 	}
 	// remove from end, return value
 	pop(): T {
@@ -81,7 +89,7 @@ export class Collection<T> implements IterableIterator<dataObj<T>>{
 	toString(): string {
 	   const sb = new StringBuilder();
 	   sb.append('[');
-       for(let index = 0; index < this._size; index++) {
+       for(let index = 0; index <= this._size; index++) {
 		  if(this.data[index] !== undefined) {
 			 sb.append(`${this.data[index]}`);
 			 if(index < this._size-1) sb.append(',');
@@ -92,6 +100,3 @@ export class Collection<T> implements IterableIterator<dataObj<T>>{
 	   return sb.build();
 	}
 }
-
-/*
- */
