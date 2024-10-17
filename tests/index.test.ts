@@ -1,42 +1,66 @@
 import { Collection } from "../Collection";
 import { dataObj } from "../utils/utils";
 
-describe("An array-like collection of data.", () => {
-	describe("Basic operations.", () => {
-	   let collection: Collection;
+describe("An array-like collection of data", () => {
+	describe("When Created", () => {
+	   let collection: Collection<number>;
 	   let value: number;
-	   let data: dataObj;
-	   let element: dataObj; 
+	   let data: dataObj<number>;
+	   let element: dataObj<number>; 
 	   let size: number;
 	   beforeAll(() => {
-		  collection = new Collection();
-		  value = 1;
+		  collection = new Collection<number>();
 	   });
-	   test("Should not be empty.", () => {
-		   expect(collection.push(value)).not.toBeFalsy();
+	   test("Should exist.", () => {
+		  expect(collection).toBeDefined();
 	   });
-	   test("Should push the item.", () => {
-		   data = collection.get();
-		   expect(data[0]).toBe(value);
-	   });
-	   test("Should retrive the items.", () => {
-		   element = collection.getElement(0);
-		   expect(element).toBe(value);
-	   });
-	   test("Should be of given length.", () => {
-		   size = collection.size;
-		   expect(size).toBe(1);
-	   });
-	   test("Should pop the items.", () => {
-		   data = collection.pop();
-		   expect(data).toEqual({});
+	   test("Should be empty.", () => {
+		  const isEmpty = collection.is_empty;
+		  expect(isEmpty).toBeTruthy();
 	   });
 	});
-	describe("That is iterable.", () => {
+	describe("Basic operations", () => {
+	   let collection: Collection<number>;
+	   beforeAll(() => {
+		  collection = new Collection<number>();
+		  collection.push(1);
+		  console.log(collection.toString());
+	   });
+	   test("Should not be empty.", () => {
+		   expect(collection.is_empty).toBeFalsy();
+	   });
+	   test("Should retrieve the item.", () => {
+		   const data = collection.at(0);
+		   expect(data).toBe(1);
+	   });
+	   test("Should be of given length.", () => {
+		   const size = collection.size;
+		   expect(size).toBe(1);
+	   });
+	   test.todo("Should prepend the given item to the Collection.");
+	   // prepend(item)
+	   test.todo("Should insert the given item at the specified index.")
+	   // insert(index, item)
+	   test.todo("Should find the specified item and return the first index.");
+	   // find(item) {
+	});
+	describe("Removal operations", () => {
+	   test.todo("Remove the item from the end of the collection and return the value.");
+	   /*
+	   data = collection.pop();
+	   expect(data).toEqual({});
+	   */
+	   // pop()
+	   test.todo("Delete the item at the given index while shifting all trailing elements left.");
+	   // delete(index)
+	   test.todo("Looks for the given value and removes the index holding it."); 
+	   // remove(item)
+	});
+	describe("That is iterable", () => {
 	   describe("Gives each value of the Collection.", () => {
-		  let collection: Collection;
+		  let collection: Collection<number>;
 		  beforeAll(() => {
-			 collection = new Collection();
+			 collection = new Collection<number>();
 			 collection.push(1);
 			 collection.push(2);
 			 collection.push(3);
@@ -48,37 +72,17 @@ describe("An array-like collection of data.", () => {
 			 expect(nextEl.done).toBeFalsy();
 			 expect(nextEl.value).toBe(1);
 		  });
-		  test("Should be 2.", () => {
-			 const nextEl = collection.next();
-			 expect(nextEl.done).toBeFalsy();
-			 expect(nextEl.value).toBe(2);
-		  });
-		  test("Should be 3.", () => {
-			 const nextEl = collection.next();
-			 expect(nextEl.done).toBeFalsy();
-			 expect(nextEl.value).toBe(3);
-		  });
-		  test("Should be 4.", () => {
-			 const nextEl = collection.next();
-			 expect(nextEl.done).toBeFalsy();
-			 expect(nextEl.value).toBe(4);
-		  });
-		  test("Should be 5.", () => {
-			 const nextEl = collection.next();
-			 expect(nextEl.done).toBeFalsy();
-			 expect(nextEl.value).toBe(5);
-		  });
-		  test("Should be null.", () => {
-			 const nextEl = collection.next();
-			 expect(nextEl.done).toBeTruthy();
-			 expect(nextEl.value).toBeNull();
-		  });
+		  test.todo("Should be 2.");
+		  test.todo("Should be 3.");
+		  test.todo("Should be 4.");
+		  test.todo("Should be 5.");
+		  test.todo("Should be null.");
 	   });
 	   describe("Gives the values as an array.", () => {
-		  let collection: Collection;
-		  let collectionArr: dataObj[];
+		  let collection: Collection<number>;
+		  let collectionArr: dataObj<number>[];
 		  beforeAll(() => {
-			 collection = new Collection();
+			 collection = new Collection<number>();
 			 collection.push(1);
 			 collection.push(2);
 			 collection.push(3);

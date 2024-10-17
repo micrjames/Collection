@@ -1,3 +1,3 @@
-export interface dataObj {
-    [index: number]: any;
+export interface dataObj<T> {
+    [index: number]: T;
 }

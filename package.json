@@ -7,7 +7,8 @@
     "test": "tests"
   },
   "scripts": {
-    "test": "jest"
+    "test": "jest",
+    "postinstall": "git clone git@github.com:micrjames/StringBuilder"
   },
   "keywords": [],
   "author": "",
