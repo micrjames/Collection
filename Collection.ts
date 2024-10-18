@@ -38,9 +38,29 @@ export class Collection<T> implements IterableIterator<dataObj<T>>{
 	};
 	// inserts item at index, shifts that index’s value and trailing elements to the right.
 	insert(index: number, item: T) {
+	   if(index < 0 || index > this._size)
+		  throw new Error("Out of Bounds.");
+	   const idxs = [...new Range(this._size+1)];
+	   const revIdxs = idxs.reverse();
+	   let value: T; 
+	   revIdxs.forEach(idx => {
+		  /*
+		  if(idx === index) {
+			 value = item;
+		  } else if(idx > index) {
+			 value = this.data[idx - 1];
+		  } else if(idx < index) {
+			 value = this.data[idx];
+		  }
+		  */
+		  idx > index ? value = this.data[idx-1] : idx === index ? value = item : value = this.data[idx];
+		  this.data[idx] = value;
+	   });
+	   this._size++;
 	}
 	// can use insert above at index 0
 	prepend(item: T) {
+	   /*
 	   const idxs = [...new Range(this._size+1)];
 	   const revIdxs = idxs.reverse();
 	   let value: T; 
@@ -49,9 +69,12 @@ export class Collection<T> implements IterableIterator<dataObj<T>>{
 		  this.data[idx] = value;
 	   });
 	   this._size++;
+	   */
+	   this.insert(0, item);
 	}
 	// remove from end, return value
-	pop(): T {
+	pop(): T | null	{
+		if(this.is_empty) return null;
 	    const data = this.data[this._size-1];
 	    delete this.data[this._size-1];
 		this._size--;

@@ -17,43 +17,74 @@ describe("An array-like collection of data", () => {
 	});
 	describe("Basic operations", () => {
 	   let collection: Collection<number>;
+	   let collSize: number;
 	   beforeAll(() => {
 		  collection = new Collection<number>();
+		  collSize = 0;
 	   });
 	   describe("push", () => {
+		  let pushValue: number;
+		  let pushIdx: number;
 		  beforeAll(() => {
-			 collection.push(1);
+			 pushIdx = 0;
+			 pushValue = 1;
+			 collection.push(pushValue);
+			 collSize++;
 		  });
 		  test("Should not be empty.", () => {
 			  expect(collection.is_empty).toBeFalsy();
 		  });
 		  test("Should retrieve the item that was 'push'ed.", () => {
-			  const data = collection.at(0);
-			  expect(data).toBe(1);
+			  const data = collection.at(pushIdx);
+			  expect(data).toBe(pushValue);
 		  });
 		  test("Should be of a size of one element.", () => {
 			  const size = collection.size;
-			  expect(size).toBe(1);
+			  expect(size).toBe(collSize);
 		  });
 	   });
 	   describe("prepend", () => {
+		  let prepValue: number;
+		  let prepIdx: number;
 		  beforeAll(() => {
-			 collection.prepend(2);
+			 prepIdx = 0;
+			 prepValue = 2;
+			 collection.prepend(prepValue);
+			 collSize++;
 		  });
 		  test("Should prepend the given item to the Collection.", () => {
-			  const data = collection.at(0);
+			  const data = collection.at(prepIdx);
 			  console.log(collection.toString());
-			  expect(data).toBe(2);
+			  expect(data).toBe(prepValue);
 		  });
 		  test("Should be of a size of two elements.", () => {
 			  const size = collection.size;
-			  expect(size).toBe(2);
+			  expect(size).toBe(collSize);
 		  });
 	   });
 	   describe("insert", () => {
-		  test.todo("Should insert the given item at the specified index.")
-		  test.todo("Should be of a size of three elements.");
-		  // insert(index, item)
+		  let insValue: number;
+		  let insIdx: number;
+		  beforeAll(() => {
+			 insIdx = 1;
+			 insValue = 3;
+			 collection.insert(insIdx, insValue);
+			 collSize++;
+		  });
+		  test("Should insert the given item at the specified index.", () => {
+			  const data = collection.at(insIdx);
+			  console.log(collection.toString());
+			  expect(data).toBe(insValue);
+		  });
+		  test("Should be of a size of three elements.", () => {
+			  const size = collection.size;
+			  expect(size).toBe(collSize);
+	 	  });
+		  test("Should throw an error if we are 'out of bounds'.", () => {
+			  expect(() => {
+				 collection.insert(-1, 0); 
+			  }).toThrow("Out of Bounds.");
+		  });
 	   });
 	   describe("find", () => {
 		  test.todo("Should find the specified item and return the first index of that item.");
