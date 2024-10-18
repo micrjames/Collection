@@ -87,7 +87,8 @@ export class Collection<T> implements IterableIterator<dataObj<T>>{
 	remove(item: T) {
 	} 
 	// looks for value and returns first index with that value, -1 if not found
-	find(item: T) {
+	find(item: T): number {
+	   return -1;
 	} 
 	/*
 	O(1) to add / remove at end, index, or update

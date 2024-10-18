@@ -36,6 +36,7 @@ describe("An array-like collection of data", () => {
 		  });
 		  test("Should retrieve the item that was 'push'ed.", () => {
 			  const data = collection.at(pushIdx);
+			  console.log(`Initial push: ${collection.toString()}`);
 			  expect(data).toBe(pushValue);
 		  });
 		  test("Should be of a size of one element.", () => {
@@ -54,7 +55,7 @@ describe("An array-like collection of data", () => {
 		  });
 		  test("Should prepend the given item to the Collection.", () => {
 			  const data = collection.at(prepIdx);
-			  console.log(collection.toString());
+			  console.log(`Prepend [Insert to 0th index] (${prepValue}): ${collection.toString()}`);
 			  expect(data).toBe(prepValue);
 		  });
 		  test("Should be of a size of two elements.", () => {
@@ -65,25 +66,49 @@ describe("An array-like collection of data", () => {
 	   describe("insert", () => {
 		  let insValue: number;
 		  let insIdx: number;
-		  beforeAll(() => {
-			 insIdx = 1;
-			 insValue = 3;
-			 collection.insert(insIdx, insValue);
-			 collSize++;
+		  describe("To middle index", () => {
+			 beforeAll(() => {
+				insIdx = 1;
+				insValue = 3;
+				collection.insert(insIdx, insValue);
+				collSize++;
+			 });
+			 test("Should insert the given item at the specified index.", () => {
+				 const data = collection.at(insIdx);
+				 console.log(`Insert to ${insIdx}st index (${insValue}): ${collection.toString()}`);
+				 expect(data).toBe(insValue);
+			 });
+			 test("Should be of a size of three elements.", () => {
+				 const size = collection.size;
+				 expect(size).toBe(collSize);
+			 });
+			 test("Should throw an error if we are 'out of bounds'.", () => {
+				 expect(() => {
+					collection.insert(-1, 0); 
+				 }).toThrow("Out of Bounds.");
+			 });
 		  });
-		  test("Should insert the given item at the specified index.", () => {
-			  const data = collection.at(insIdx);
-			  console.log(collection.toString());
-			  expect(data).toBe(insValue);
-		  });
-		  test("Should be of a size of three elements.", () => {
-			  const size = collection.size;
-			  expect(size).toBe(collSize);
-	 	  });
-		  test("Should throw an error if we are 'out of bounds'.", () => {
-			  expect(() => {
-				 collection.insert(-1, 0); 
-			  }).toThrow("Out of Bounds.");
+		  describe("At end", () => {
+			 beforeAll(() => {
+				insIdx = 3;
+				insValue = 4;
+				collection.insert(insIdx, insValue);
+				collSize++;
+			 });
+			 test("Should insert the given item at the specified index.", () => {
+				 const data = collection.at(insIdx);
+				 console.log(`Insert to ${insIdx}th index (${insValue}): ${collection.toString()}`);
+				 expect(data).toBe(insValue);
+			 });
+			 test("Should be of a size of three elements.", () => {
+				 const size = collection.size;
+				 expect(size).toBe(collSize);
+			 });
+			 test("Should throw an error if we are 'out of bounds'.", () => {
+				 expect(() => {
+					collection.insert(-1, 0); 
+				 }).toThrow("Out of Bounds.");
+			 });
 		  });
 	   });
 	   describe("find", () => {
