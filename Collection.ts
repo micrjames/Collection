@@ -53,7 +53,7 @@ export class Collection<T> implements IterableIterator<dataObj<T>>{
 			 value = this.data[idx];
 		  }
 		  */
-		  idx > index ? value = this.data[idx-1] : idx === index ? value = item : value = this.data[idx];
+		  value = idx > index ? this.data[idx-1] : idx === index ? item : this.data[idx];
 		  this.data[idx] = value;
 	   });
 	   this._size++;
@@ -88,7 +88,10 @@ export class Collection<T> implements IterableIterator<dataObj<T>>{
 	} 
 	// looks for value and returns first index with that value, -1 if not found
 	find(item: T): number {
-	   return -1;
+	   const idxs = [...new Range(this._size)];
+	   let foundIdx: number; 
+	   foundIdx = idxs.filter(idx => this.data[idx] === item).pop();
+	   return foundIdx !== undefined ? foundIdx : -1;
 	} 
 	/*
 	O(1) to add / remove at end, index, or update

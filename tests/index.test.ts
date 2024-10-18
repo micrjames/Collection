@@ -66,10 +66,12 @@ describe("An array-like collection of data", () => {
 	   describe("insert", () => {
 		  let insValue: number;
 		  let insIdx: number;
+		  let errIdx: number;
 		  describe("To middle index", () => {
 			 beforeAll(() => {
 				insIdx = 1;
 				insValue = 3;
+				errIdx = -1;
 				collection.insert(insIdx, insValue);
 				collSize++;
 			 });
@@ -84,7 +86,7 @@ describe("An array-like collection of data", () => {
 			 });
 			 test("Should throw an error if we are 'out of bounds'.", () => {
 				 expect(() => {
-					collection.insert(-1, 0); 
+					collection.insert(errIdx, 0); 
 				 }).toThrow("Out of Bounds.");
 			 });
 		  });
@@ -106,27 +108,57 @@ describe("An array-like collection of data", () => {
 			 });
 			 test("Should throw an error if we are 'out of bounds'.", () => {
 				 expect(() => {
-					collection.insert(-1, 0); 
+					collection.insert(errIdx, 0); 
 				 }).toThrow("Out of Bounds.");
 			 });
 		  });
 	   });
 	   describe("find", () => {
-		  test.todo("Should find the specified item and return the first index of that item.");
-		  test.todo("Should 'find' an item that is of type 'number'.");
-		  test.todo("Should be of a size of three elements.");
-		  // find(item) {
+		  let collSize: number;
+		  let itemToFind: number;
+		  let errorValue: number;
+		  let collString: string;
+		  let collSlicedString: string;
+		  let collSlicedSplitString: string[];
+		  let foundIdx: number;
+		  beforeAll(() => {
+			 collSize = collection.size;
+			 errorValue = -1;
+			 itemToFind = 3;
+			 collString = collection.toString();
+			 collSlicedString = collString.slice(1,-1);
+			 collSlicedSplitString = collSlicedString.split(",");
+			 foundIdx = collection.find(itemToFind);
+		  });
+		  test("Should return a value that is of type 'number' and be a positive number.", () => {
+			 const posCheck = foundIdx > 0;
+			 expect(foundIdx).toStrictEqual(expect.any(Number));
+			 expect(posCheck).toBeTruthy();
+		  });
+		  test("Should find the specified item and return the first index of that item.", () => {
+			 const CSSSIdx = collSlicedSplitString.findIndex(item => item === `${itemToFind}`);
+			 console.log(`Find item ${itemToFind} at ${CSSSIdx}st index: ${collection.toString()}`);
+			 expect(foundIdx).toBe(CSSSIdx);
+		  });
+		  test("Should still be of a size of three elements.", () => {
+		  	 const CSSSSize = collSlicedSplitString.length;
+			 expect(collSize).toBe(CSSSSize);
+		  });
+		  test(`Should return a value of ${errorValue} if the specified is not found.`, () => {
+			 const errFindIdx = collection.find(5);
+			 expect(errFindIdx).toBe(errorValue);
+		  });
 	   });
 	});
 	describe("Removal operations", () => {
 	   let collection: Collection<number>;
-	   let size: number;
+	   let collSize: number;
 	   beforeAll(() => {
 		  collection = new Collection<number>();
 		  collection.push(1);
 		  collection.push(2);
 		  collection.push(3);
-		  size = collection.size;
+		  collSize = collection.size;
 	   });
 	   describe("pop", () => {
 		  test("Remove the item from the end of the collection and return the value.", () => {
@@ -135,12 +167,17 @@ describe("An array-like collection of data", () => {
 		  });
 		  test("Should give a size that is one less than the size of the collection before the operation.", () => {
 			 const newSize = collection.size;
-			 expect(newSize).toBe(size-1);
+			 expect(newSize).toBe(collSize-1);
 		  });
 	   });
 	   describe("delete", () => {
 		  test.todo("Delete the item at the given index while shifting all trailing elements left.");
 		  test.todo("Should give a size that is two less than the size of the collection before the operation.");
+		  test.failing("Should throw an error if we are 'out of bounds'.", () => {
+			  expect(() => {
+				 collection.delete(-1); 
+			  }).toThrow("Out of Bounds.");
+		  });
 		  // delete(index)
 	   });
 	   describe("remove", () => {
