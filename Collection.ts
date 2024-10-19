@@ -65,7 +65,7 @@ export class Collection<T> implements IterableIterator<dataObj<T>>{
 	   const revIdxs = idxs.reverse();
 	   let value: T; 
 	   revIdxs.forEach(idx => {
-		  idx > 0 ? value = this.data[idx-1] : value = item;
+		  value = idx > 0 ? this.data[idx-1] : item;
 		  this.data[idx] = value;
 	   });
 	   this._size++;
@@ -82,6 +82,16 @@ export class Collection<T> implements IterableIterator<dataObj<T>>{
 	}
 	// delete item at index, shifting all trailing elements left
 	delete(index: number) {
+	   if(index < 0 || index > this._size)
+		  throw new Error("Out of Bounds.");
+	   const idxs = [...new Range(this._size)];
+	   let value: T;
+	   idxs.forEach(idx => {
+		  value = idx >= index ? this.data[idx+1] : this.data[idx];
+		  this.data[idx] = value;
+	   });
+	   this._size--;
+	   delete this.data[this._size];
 	} 
 	// looks for value and removes index holding it (even if in multiple places)
 	remove(item: T) {

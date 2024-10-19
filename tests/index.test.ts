@@ -21,6 +21,7 @@ describe("An array-like collection of data", () => {
 	   beforeAll(() => {
 		  collection = new Collection<number>();
 		  collSize = 0;
+		  console.log("Basic Operations:");
 	   });
 	   describe("push", () => {
 		  let pushValue: number;
@@ -155,30 +156,92 @@ describe("An array-like collection of data", () => {
 	   let collSize: number;
 	   beforeAll(() => {
 		  collection = new Collection<number>();
-		  collection.push(1);
-		  collection.push(2);
-		  collection.push(3);
-		  collSize = collection.size;
+		  console.log("Removal Operations:\n");
 	   });
 	   describe("pop", () => {
+		  let pushValues: number[];
+		  beforeAll(() => {
+			 pushValues = [1, 2, 3, 4];
+			 collection.push(pushValues[0]);
+			 collection.push(pushValues[1]);
+			 collection.push(pushValues[2]);
+			 collection.push(pushValues[3]);
+			 collSize = collection.size;
+			 console.log(`After four 'push' operations: ${collection.toString()}`);
+		  });
 		  test("Remove the item from the end of the collection and return the value.", () => {
+			 const lastPushedValue = pushValues[pushValues.length-1];
+			 const lastPushedValueIdx = collection.size-1;
 			 const data = collection.pop();
-			 expect(data).toBe(3);
+			 collSize--;
+			 console.log(`Pop item '${lastPushedValue}' at ${lastPushedValueIdx}nd index: ${collection.toString()}`);
+			 expect(data).toBe(lastPushedValue);
 		  });
 		  test("Should give a size that is one less than the size of the collection before the operation.", () => {
 			 const newSize = collection.size;
-			 expect(newSize).toBe(collSize-1);
+			 expect(newSize).toBe(collSize);
 		  });
 	   });
 	   describe("delete", () => {
-		  test.todo("Delete the item at the given index while shifting all trailing elements left.");
-		  test.todo("Should give a size that is two less than the size of the collection before the operation.");
-		  test.failing("Should throw an error if we are 'out of bounds'.", () => {
-			  expect(() => {
-				 collection.delete(-1); 
-			  }).toThrow("Out of Bounds.");
+		  let delIdx: number;
+		  let errIdx: number;
+		  describe("From middle index", () => {
+			 let itemToDelete: number;
+			 let collString: string;
+			 let collSlicedString: string;
+			 let collSlicedSplitString: string[];
+			 beforeAll(() => {
+				delIdx = 1;
+				errIdx = -1;
+				collString = collection.toString();
+				collSlicedString = collString.slice(1,-1);
+				collSlicedSplitString = collSlicedString.split(",");
+				itemToDelete = +collSlicedSplitString.find((_, idx) => idx === delIdx);
+				collection.delete(delIdx);
+				collSize--;
+			 });
+			 test("Should delete the given item from the specified index.", () => {
+				 const data = collection.at(delIdx);
+				 console.log(`Delete from ${delIdx}st index (${itemToDelete}): ${collection.toString()}`);
+				 expect(data).not.toBe(itemToDelete);
+			 });
+			 test(`Should be of a size of ${collSize} elements.`, () => {
+				 const size = collection.size;
+				 expect(size).toBe(collSize);
+			 });
 		  });
-		  // delete(index)
+		  describe("At end", () => {
+			 let itemToDelete: number;
+			 let collString: string;
+			 let collSlicedString: string;
+			 let collSlicedSplitString: string[];
+			 beforeAll(() => {
+				delIdx = collSize-1;
+				errIdx = -1;
+				collString = collection.toString();
+				collSlicedString = collString.slice(1,-1);
+				collSlicedSplitString = collSlicedString.split(",");
+				itemToDelete = +collSlicedSplitString.find((_, idx) => idx === delIdx);
+				collection.delete(delIdx);
+				collSize--;
+			 });
+			 test("Should delete the given item from the specified index.", () => {
+				 const data = collection.at(delIdx);
+				 console.log(`Delete from ${delIdx}st index (${itemToDelete}): ${collection.toString()}`);
+				 expect(data).not.toBe(itemToDelete);
+			 });
+			 test(`Should be of a size of ${collSize} elements.`, () => {
+				 const size = collection.size;
+				 expect(size).toBe(collSize);
+			 });
+		  });
+		  describe("From outside of a existing index", () => {
+			 test("Should throw an error if we are 'out of bounds'.", () => {
+				 expect(() => {
+					collection.delete(errIdx); 
+				 }).toThrow("Out of Bounds.");
+			 });
+		  });
 	   });
 	   describe("remove", () => {
 		  test.todo("Looks for the given value and removes the index holding it."); 
