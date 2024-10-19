@@ -95,6 +95,8 @@ export class Collection<T> implements IterableIterator<dataObj<T>>{
 	} 
 	// looks for value and removes index holding it (even if in multiple places)
 	remove(item: T) {
+	   const remIdx = this.find(item);
+	   this.delete(remIdx);
 	} 
 	// looks for value and returns first index with that value, -1 if not found
 	find(item: T): number {

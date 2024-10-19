@@ -244,9 +244,31 @@ describe("An array-like collection of data", () => {
 		  });
 	   });
 	   describe("remove", () => {
-		  test.todo("Looks for the given value and removes the index holding it."); 
-		  test.todo("Should give a size that is three less than the size of the collection before the operation.");
-		  // remove(item)
+		  let remIdx: number;
+		  describe("From starting index", () => {
+			 let itemToRemove: number;
+			 let collString: string;
+			 let collSlicedString: string;
+			 let collSlicedSplitString: string[];
+			 beforeAll(() => {
+				remIdx = 0;
+				collString = collection.toString();
+				collSlicedString = collString.slice(1,-1);
+				collSlicedSplitString = collSlicedString.split(",");
+				itemToRemove = +collSlicedSplitString.find((_, idx) => idx === remIdx);
+				collection.remove(itemToRemove);
+				collSize--;
+			 });
+			 test("Should remove the given item from the specified index.", () => {
+				 const data = collection.at(remIdx);
+				 console.log(`Delete from ${remIdx}th index (${itemToRemove}): ${collection.toString()}`);
+				 expect(data).not.toBe(itemToRemove);
+			 });
+			 test(`Should be of a size of ${collSize} elements.`, () => {
+				 const size = collection.size;
+				 expect(size).toBe(collSize);
+			 });
+		  });
 	   });
 	});
 	describe("That is iterable", () => {
