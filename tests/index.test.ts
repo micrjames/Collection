@@ -287,11 +287,31 @@ describe("An array-like collection of data", () => {
 			 expect(nextEl.done).toBeFalsy();
 			 expect(nextEl.value).toBe(1);
 		  });
-		  test.todo("Should be 2.");
-		  test.todo("Should be 3.");
-		  test.todo("Should be 4.");
-		  test.todo("Should be 5.");
-		  test.todo("Should be null.");
+		  test("Should be 2.", () => {
+			 const nextEl = collection.next();
+			 expect(nextEl.done).toBeFalsy();
+			 expect(nextEl.value).toBe(2);
+		  });
+		  test("Should be 3.", () => {
+			 const nextEl = collection.next();
+			 expect(nextEl.done).toBeFalsy();
+			 expect(nextEl.value).toBe(3);
+		  });
+		  test("Should be 4.", () => {
+			 const nextEl = collection.next();
+			 expect(nextEl.done).toBeFalsy();
+			 expect(nextEl.value).toBe(4);
+		  });
+		  test("Should be 5.", () => {
+			 const nextEl = collection.next();
+			 expect(nextEl.done).toBeFalsy();
+			 expect(nextEl.value).toBe(5);
+		  });
+		  test("Should be null.", () => {
+			 const nextEl = collection.next();
+			 expect(nextEl.done).toBeTruthy();
+			 expect(nextEl.value).toBeNull();
+		  });
 	   });
 	   describe("Gives the values as an array.", () => {
 		  let collection: Collection<number>;
