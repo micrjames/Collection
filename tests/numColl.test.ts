@@ -1,11 +1,13 @@
 import { Collection } from "../Collection";
 import { dataObj } from "../utils/utils";
 
-describe("An array-like collection of data", () => {
+describe("An array-like Collection of data", () => {
+    console.log("A Collection of numbers:");
 	describe("When Created", () => {
 	   let collection: Collection<number>;
 	   beforeAll(() => {
 		  collection = new Collection<number>();
+		  console.log(`${collection.toString()}`);
 	   });
 	   test("Should exist.", () => {
 		  expect(collection).toBeDefined();
@@ -13,6 +15,10 @@ describe("An array-like collection of data", () => {
 	   test("Should be empty.", () => {
 		  const isEmpty = collection.is_empty;
 		  expect(isEmpty).toBeTruthy();
+	   });
+	   test("Should not give an item.", () => {
+		  const data = collection.at(0);
+		  expect(data).toBeNull();
 	   });
 	});
 	describe("Basic operations", () => {
@@ -26,8 +32,10 @@ describe("An array-like collection of data", () => {
 	   describe("push", () => {
 		  let pushValue: number;
 		  let pushIdx: number;
+		  let errIdx: number;
 		  beforeAll(() => {
 			 pushIdx = 0;
+			 errIdx = -1;
 			 pushValue = 1;
 			 collection.push(pushValue);
 			 collSize++;
