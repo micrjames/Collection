@@ -138,10 +138,7 @@ describe("An array-like Collection of data", () => {
 			 collString = collection.toString();
 			 collSlicedString = collString.slice(1,-1);
 			 collSlicedSplitString = collSlicedString.split(/},/);
-			 collSlicedSplitString = collSlicedSplitString.map((str,idx,arr) => {
-				if(idx !== arr.length-1) return str + '}';
-				else return str;
-			 });
+			 collSlicedSplitString = collSlicedSplitString.map((str,idx,arr) => idx !== arr.length-1 ? str + '}' : str);
 			 foundIdx = collection.find(itemToFind);
 		  });
 		  test("Should find the specified item and return the first index of that item.", () => {
@@ -196,13 +193,11 @@ describe("An array-like Collection of data", () => {
 			 expect(newSize).toBe(collSize);
 		  });
 	   });
-   });
-	/*
 	   describe("delete", () => {
 		  let delIdx: number;
 		  let errIdx: number;
 		  describe("From middle index", () => {
-			 let itemToDelete: number;
+			 let itemToDelete: string;
 			 let collString: string;
 			 let collSlicedString: string;
 			 let collSlicedSplitString: string[];
@@ -211,8 +206,9 @@ describe("An array-like Collection of data", () => {
 				errIdx = -1;
 				collString = collection.toString();
 				collSlicedString = collString.slice(1,-1);
-				collSlicedSplitString = collSlicedString.split(",");
-				itemToDelete = +collSlicedSplitString.find((_, idx) => idx === delIdx);
+				collSlicedSplitString = collSlicedString.split(/},/);
+				collSlicedSplitString = collSlicedSplitString.map((str,idx,arr) => idx !== arr.length-1 ? str + '}' : str);
+				itemToDelete = collSlicedSplitString.find((_, idx) => idx === delIdx);
 				collection.delete(delIdx);
 				collSize--;
 			 });
@@ -227,7 +223,7 @@ describe("An array-like Collection of data", () => {
 			 });
 		  });
 		  describe("At end", () => {
-			 let itemToDelete: number;
+			 let itemToDelete: string;
 			 let collString: string;
 			 let collSlicedString: string;
 			 let collSlicedSplitString: string[];
@@ -236,8 +232,9 @@ describe("An array-like Collection of data", () => {
 				errIdx = -1;
 				collString = collection.toString();
 				collSlicedString = collString.slice(1,-1);
-				collSlicedSplitString = collSlicedString.split(",");
-				itemToDelete = +collSlicedSplitString.find((_, idx) => idx === delIdx);
+				collSlicedSplitString = collSlicedString.split(/},/);
+				collSlicedSplitString = collSlicedSplitString.map((str,idx,arr) => idx !== arr.length-1 ? str + '}' : str);
+				itemToDelete = collSlicedSplitString.find((_, idx) => idx === delIdx);
 				collection.delete(delIdx);
 				collSize--;
 			 });
@@ -259,6 +256,9 @@ describe("An array-like Collection of data", () => {
 			 });
 		  });
 	   });
+   });
+	/*
+
 	   describe("remove", () => {
 		  let remIdx: number;
 		  describe("From starting index", () => {
@@ -286,7 +286,7 @@ describe("An array-like Collection of data", () => {
 			 });
 		  });
 	   });
-	});
+
 	describe("That is iterable", () => {
 	   describe("Gives each value of the Collection.", () => {
 		  let collection: Collection<number>;
