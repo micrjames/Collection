@@ -160,18 +160,22 @@ describe("An array-like Collection of data", () => {
 		  });
 	   });
 	});
-	/*
 	describe("Removal operations", () => {
-	   let collection: Collection<number>;
+	   let collection: Collection<pt>;
 	   let collSize: number;
 	   beforeAll(() => {
-		  collection = new Collection<number>();
+		  collection = new Collection<pt>();
 		  console.log("Removal Operations:\n");
 	   });
 	   describe("pop", () => {
-		  let pushValues: number[];
+		  let pushValues: pt[];
 		  beforeAll(() => {
-			 pushValues = [1, 2, 3, 4];
+			 pushValues = [
+				new Point(1, 0).pt,
+				new Point(0, 1).pt,
+				new Point(0, 0).pt,
+				new Point(-1, 0).pt
+			 ];
 			 collection.push(pushValues[0]);
 			 collection.push(pushValues[1]);
 			 collection.push(pushValues[2]);
@@ -184,7 +188,7 @@ describe("An array-like Collection of data", () => {
 			 const lastPushedValueIdx = collection.size-1;
 			 const data = collection.pop();
 			 collSize--;
-			 console.log(`Pop item '${lastPushedValue}' at ${lastPushedValueIdx}nd index: ${collection.toString()}`);
+			 console.log(`Pop item '${JSON.stringify(lastPushedValue)}' at ${lastPushedValueIdx}nd index: ${collection.toString()}`);
 			 expect(data).toBe(lastPushedValue);
 		  });
 		  test("Should give a size that is one less than the size of the collection before the operation.", () => {
@@ -192,6 +196,8 @@ describe("An array-like Collection of data", () => {
 			 expect(newSize).toBe(collSize);
 		  });
 	   });
+   });
+	/*
 	   describe("delete", () => {
 		  let delIdx: number;
 		  let errIdx: number;
